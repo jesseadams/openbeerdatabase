@@ -6,6 +6,12 @@ breweries.each do |brewery|
   created_breweries << Brewery.create({:name => brewery})
 end
 
+puts "Creating Beer Style: American Imperial / Double IPA"
+beer_style = BeerStyle.create({
+  :name => 'American Imperial / Double IPA',
+  :description => 'Take an India Pale Ale and feed it steroids, ergo the term Double IPA. Although open to the same interpretation as its sister styles, you should expect something robust, malty, alcoholic and with a hop profile that might rip your tongue out. The Imperial usage comes from Russian Imperial stout, a style of strong stout originally brewed in England for the Russian Imperial Court of the late 1700s; though Double IPA is often the preferred name.'
+})
+
 puts "Creating Beer: Assailant Double IPA"
 beer = Beer.new({
   :name => 'Assailant Double IPA',
@@ -13,4 +19,5 @@ beer = Beer.new({
   :abv => 7.5,
 })
 beer.brewery = created_breweries.first
+beer.beer_style = beer_style
 beer.save!

@@ -1,26 +1,18 @@
-class Beer < ActiveRecord::Base
+class BeerStyle < ActiveRecord::Base
   SORTABLE_COLUMNS = %w(id name created_at updated_at).freeze
 
   include SearchableModel
+  include BeerAssociation
 
-  belongs_to :brewery
+  has_many :beers
   belongs_to :user
-  belongs_to :beer_style
 
-  validates :brewery_id,  presence: true
-  validates :name,        presence: true, length: { maximum: 255 }
+  validates :name, presence: true, length: { maximum: 255 }
   validates :description, presence: true, length: { maximum: 4096 }
-  validates :abv,         presence: true, numericality: true
 
-  attr_accessible :name, :description, :abv
+  attr_accessible :name, :description
 
-  def self.filter_by_brewery_id(brewery_id)
-    if brewery_id.present?
-      where(brewery_id: brewery_id)
-    else
-      where("")
-    end
-  end
+  before_destroy :ensure_no_associated_beers_exist
 
   def self.search(options = {})
     includes(:brewery)

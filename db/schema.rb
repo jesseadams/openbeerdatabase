@@ -11,16 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111108054439) do
+ActiveRecord::Schema.define(:version => 20130302210934) do
+
+  create_table "beer_styles", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name",        :null => false
+    t.text     "description", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "beer_styles", ["user_id"], :name => "index_beer_styles_on_user_id"
 
   create_table "beers", :force => true do |t|
     t.integer  "user_id"
-    t.string   "name",        :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.float    "abv",         :null => false
-    t.text     "description", :null => false
-    t.integer  "brewery_id",  :null => false
+    t.string   "name",          :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.float    "abv",           :null => false
+    t.text     "description",   :null => false
+    t.integer  "brewery_id",    :null => false
+    t.integer  "beer_style_id"
   end
 
   add_index "beers", ["user_id"], :name => "index_beers_on_user_id"
