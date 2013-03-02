@@ -67,3 +67,4 @@ end
 
 require "./lib/authentication"
 require "./lib/searchable_model"
+require "./lib/beer_association"

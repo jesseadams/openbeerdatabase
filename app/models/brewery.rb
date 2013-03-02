@@ -2,6 +2,7 @@ class Brewery < ActiveRecord::Base
   SORTABLE_COLUMNS = %w(id name created_at updated_at).freeze
 
   include SearchableModel
+  include BeerAssociation
 
   has_many   :beers
   belongs_to :user
@@ -27,11 +28,5 @@ class Brewery < ActiveRecord::Base
 
   def public?
     user_id.nil?
-  end
-
-  private
-
-  def ensure_no_associated_beers_exist
-    beers.count == 0
   end
 end
