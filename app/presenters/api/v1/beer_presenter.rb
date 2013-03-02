@@ -13,6 +13,10 @@ class Api::V1::BeerPresenter < ApiPresenter
       brewery:     {
         id:   @beer.brewery.id,
         name: @beer.brewery.name
+      },
+      beer_style:  {
+        id:   @beer.beer_style.id,
+        name: @beer.beer_style.name
       }
     }
   end

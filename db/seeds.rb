@@ -2,7 +2,7 @@ breweries = ['Haymarket Pub and Brewery', 'Three Floyds', 'Revolution Brewing']
 
 created_breweries = []
 breweries.each do |brewery|
-  puts "Creating Brewery: #{brewery}"
+  puts "Creating Brewery: {brewery}"
   created_breweries << Brewery.create({:name => brewery})
 end
 
@@ -21,3 +21,16 @@ beer = Beer.new({
 beer.brewery = created_breweries.first
 beer.beer_style = beer_style
 beer.save!
+
+puts "Creating User: Developer"
+user = User.create({
+  :name => 'Developer',
+  :email => 'developer@example.com',
+  :password => 'pass123word',
+  :password_confirmation => 'pass123word',
+})
+user.update_attribute(:administrator, true)
+
+puts "Password: pass123word"
+puts "Public Token: #{user.public_token}"
+puts "Private Token: #{user.private_token}"

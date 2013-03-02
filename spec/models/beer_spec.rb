@@ -3,9 +3,13 @@ require "spec_helper"
 describe Beer do
   it { should belong_to(:brewery) }
   it { should belong_to(:user) }
+  it { should belong_to(:beer_style) }
 
   it { should validate_presence_of(:brewery_id) }
   it { should_not allow_mass_assignment_of(:brewery_id) }
+
+  it { should validate_presence_of(:beer_style_id) }
+  it { should_not allow_mass_assignment_of(:beer_style_id) }
 
   it { should validate_presence_of(:name) }
   it { should ensure_length_of(:name).is_at_most(255) }
@@ -39,6 +43,24 @@ describe Beer, ".filter_by_brewery_id" do
     Beer.filter_by_brewery_id("").should  == beers
     Beer.filter_by_brewery_id(" ").should == beers
     Beer.filter_by_brewery_id(nil).should == beers
+  end
+end
+
+describe Beer, ".filter_by_beer_style_id" do
+  let(:ipa)        { create(:beer, name: "IPA") }
+  let(:stout)      { create(:beer, beer_style: beer_style, name: "Stout") }
+  let(:stout_two)  { create(:beer, beer_style: beer_style, name: "Stout 2") }
+  let(:beer_style) { create(:beer_style, name: 'Stout') }
+  let!(:beers)     { [ipa, stout, stout_two] }
+
+  it "filters results" do
+    Beer.filter_by_beer_style_id(beer_style.id).should == [stout, stout_two]
+  end
+
+  it "does not filter results if no beer style ID is provided" do
+    Beer.filter_by_beer_style_id("").should  == beers
+    Beer.filter_by_beer_style_id(" ").should == beers
+    Beer.filter_by_beer_style_id(nil).should == beers
   end
 end
 
@@ -97,12 +119,14 @@ describe Beer, ".search" do
 
   before do
     Beer.stubs(includes: scope)
-    scope.stubs(page:                 scope,
-                order_by:             scope,
-                per_page:             scope,
-                for_token:            scope,
-                filter_by_name:       scope,
-                filter_by_brewery_id: scope)
+    scope.stubs(page:                    scope,
+                order_by:                scope,
+                per_page:                scope,
+                for_token:               scope,
+                filter_by_name:          scope,
+                filter_by_brewery_id:    scope,
+                filter_by_beer_style_id: scope,
+                includes:                scope)
   end
 
   it "includes the brewery assocation" do

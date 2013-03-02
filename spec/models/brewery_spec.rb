@@ -12,7 +12,11 @@ describe Brewery do
   it { should allow_mass_assignment_of(:url) }
 
   it "includes SearchableModel" do
-    Beer.included_modules.should include(SearchableModel)
+    Brewery.included_modules.should include(SearchableModel)
+  end
+
+  it "includes BeerAssociation" do
+    Brewery.included_modules.should include(BeerAssociation)
   end
 end
 

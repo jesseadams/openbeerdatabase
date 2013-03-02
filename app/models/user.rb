@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :beers
   has_many :breweries
+  has_many :beer_styles
 
   has_secure_password
 

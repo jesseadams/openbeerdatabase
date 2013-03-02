@@ -2,9 +2,16 @@ FactoryGirl.define do
   factory :beer do
     association :brewery
     association :user
+    association :beer_style
     name        "Strawberry Harvest"
     description "Strawberry Harvest Lager is a wheat beer made with real Louisiana strawberries."
     abv         4.2
+  end
+
+  factory :beer_style do
+    association :user
+    name        "American IPA"
+    description "A very delicious ale."
   end
 
   factory :brewery do

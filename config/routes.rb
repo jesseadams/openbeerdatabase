@@ -3,6 +3,7 @@ OpenBeerDatabase::Application.routes.draw do
     namespace :v1, module: "Api::V1" do
       resources :beers,     only: [:index, :show, :create, :update, :destroy]
       resources :breweries, only: [:index, :show, :create, :update, :destroy]
+      resources :beer_styles, only: [:index, :show, :create, :update, :destroy]
     end
   end
 

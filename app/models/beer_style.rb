@@ -15,10 +15,8 @@ class BeerStyle < ActiveRecord::Base
   before_destroy :ensure_no_associated_beers_exist
 
   def self.search(options = {})
-    includes(:brewery)
-      .for_token(options[:token])
+    for_token(options[:token])
       .filter_by_name(options[:query])
-      .filter_by_brewery_id(options[:brewery_id])
       .page(options[:page])
       .per_page(options[:per_page] || 50)
       .order_by(options[:order])
