@@ -1,8 +1,8 @@
 <header>
-  <h1>GET /beers/:id</h1>
+  <h1>GET /beer_styles/:id</h1>
 </header>
 
-<p>Retrieve the details of a specific beer.</p>
+<p>Retrieve the details of a specific beer style.</p>
 
 <h2>Parameters</h2>
 
@@ -25,7 +25,7 @@
     <tr>
       <td>token</td>
       <td>string</td>
-      <td>The token of the API user who created the beer, if an API user created the beer. <span>Public or private.</span></td>
+      <td>The token of the API user who created the beer style, if an API user created the beer style. <span>Public or private.</span></td>
     </tr>
   </tbody>
 </table>
@@ -57,7 +57,7 @@
 
 <h2>Example</h2>
 
-<div class="highlight"><pre><code>GET /v1/beers/<span class="variable">id</span>.json HTTP/1.1
+<div class="highlight"><pre><code>GET /v1/beer_styles/<span class="variable">id</span>.json HTTP/1.1
 Host: api.openbeerdatabase.com
 Content-Type: application/json; charset=utf-8</code></pre>
 </div>
@@ -67,19 +67,10 @@ Content-Type: application/json; charset=utf-8
 Content-Length: <span class="variable">length</span>
 
 <span class="p">{</span> <span class="s2">&#34;id&#34;</span>          <span class="o">:</span> <span class="variable">id</span><span class="p">,</span>
-  <span class="s2">&#34;name&#34;</span>        <span class="o">:</span> <span class="s2">&#34;Strawberry Harvest&#34;</span><span class="p">,</span>
-  <span class="s2">&#34;description&#34;</span> <span class="o">:</span> <span class="s2">&#34;Strawberry Harvest Lager is a wheat beer ...&#34;</span><span class="p">,</span>
-  <span class="s2">&#34;abv&#34;</span>         <span class="o">:</span> <span class="mi">4.2</span><span class="p">,</span>
+  <span class="s2">&#34;name&#34;</span>        <span class="o">:</span> <span class="s2">&#34;American Porter&#34;</span><span class="p">,</span>
+  <span class="s2">&#34;description&#34;</span> <span class="o">:</span> <span class="s2">&#34;Inspired from the now wavering English Porter ...&#34;</span><span class="p">,</span>
   <span class="s2">&#34;created_at&#34;</span>  <span class="o">:</span> <span class="s2">&#34;2010-01-01T00:00:00Z&#34;</span><span class="p">,</span>
   <span class="s2">&#34;updated_at&#34;</span>  <span class="o">:</span> <span class="s2">&#34;2010-02-02T12:30:00Z&#34;</span><span class="p">,</span>
-  <span class="s2">&#34;brewery&#34;</span>     <span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&#34;id&#34;</span>   <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&#34;name&#34;</span> <span class="o">:</span> <span class="s2">&#34;Abita&#34;</span>
-  <span class="p">},</span>
-  <span class="s2">&#34;beer_style&#34;</span>     <span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&#34;id&#34;</span>   <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&#34;name&#34;</span> <span class="o">:</span> <span class="s2">&#34;Fruit / Vegetable Beer&#34;</span>
-  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
 </div>

@@ -43,6 +43,11 @@
       <td>The ID of the brewery to create a beer for.</td>
     </tr>
     <tr>
+      <td>beer_style_id</td>
+      <td>integer</td>
+      <td>The ID of the beer style that describes the beer.</td>
+    </tr>
+    <tr>
       <td>token</td>
       <td>string</td>
       <td>Token of the API user creating the beer. <span>Private only.</span></td>
@@ -83,6 +88,7 @@ Content-Type: application/json; charset=utf-8
 Content-Length: <span class="variable">length</span>
 
 <span class="p">{</span> <span class="s2">&#34;brewery_id&#34;</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&#34;beer_style_id&#34;</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">&#34;beer&#34;</span>       <span class="o">:</span> <span class="p">{</span>
     <span class="s2">&#34;name&#34;</span>        <span class="o">:</span> <span class="s2">&#34;Strawberry Harvest&#34;</span><span class="p">,</span>
     <span class="s2">&#34;description&#34;</span> <span class="o">:</span> <span class="s2">&#34;Strawberry Harvest Lager is a wheat beer ...&#34;</span><span class="p">,</span>
