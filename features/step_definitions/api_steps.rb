@@ -55,14 +55,18 @@ end
 
 # Beer
 
-When /^I create the following beers? via the API for the "([^"]*)" brewery using the "([^"]*)" token:$/ do |brewery_name, token, table|
+When /^I create the following "([^"]*)" style beers? via the API for the "([^"]*)" brewery using the "([^"]*)" token:$/ do |beer_style_name, brewery_name, token, table|
   brewery = Brewery.find_by_name!(brewery_name)
+  beer_style = BeerStyle.find_by_name!(beer_style_name)
 
   table.hashes.each do |hash|
-    step %{I send an API POST request to /v1/beers.json?token=#{token}}, {
-      brewery_id: brewery.id,
-      beer:       hash
+    json = {
+        beer_style_id: beer_style.id,
+        brewery_id:    brewery.id,
+        beer:          hash
     }.to_json
+
+    step %{I send an API POST request to /v1/beers.json?token=#{token}}, json
   end
 end
 

@@ -13,12 +13,17 @@ Feature: List beers
       | 1  | Southern Tier |
       | 2  | Abita         |
       | 3  | Russian River |
+    And the following beer styles exist:
+      | id | name                           | description      |
+      | 1  | Pumpkin Ale                    | Pumpkiny         | 
+      | 2  | American Double / Imperial IPA | Delicious ale    |
+      | 3  | Fruit / Vegetable Beer         | Fruity and stuff |
     And the following beers exist:
-      | id | user                  | brewery             | name               | description | abv | created_at | updated_at |
-      | 1  |                       | name: Southern Tier | Pumpking           | Seasonal.   | 8.8 | 2010-01-01 | 2010-02-02 |
-      | 2  | private_token: x1y2z3 | name: Russian River | Pliney the Elder   | Rare.       | 8.0 | 2010-03-03 | 2010-04-04 |
-      | 3  |                       | name: Abita         | Strawberry Harvest | Southern.   | 4.2 | 2010-05-05 | 2010-06-06 |
-      | 4  | private_token: d1e2f3 | name: Russian River | Pliney the Younger | Rarer.      | 8.0 | 2010-07-07 | 2010-08-08 |
+      | id | user                  | brewery             | beer_style                           | name               | description | abv | created_at | updated_at |
+      | 1  |                       | name: Southern Tier | name: Pumpkin Ale                    | Pumpking           | Seasonal.   | 8.8 | 2010-01-01 | 2010-02-02 |
+      | 2  | private_token: x1y2z3 | name: Russian River | name: American Double / Imperial IPA | Pliney the Elder   | Rare.       | 8.0 | 2010-03-03 | 2010-04-04 |
+      | 3  |                       | name: Abita         | name: Fruit / Vegetable Beer         | Strawberry Harvest | Southern.   | 4.2 | 2010-05-05 | 2010-06-06 |
+      | 4  | private_token: d1e2f3 | name: Russian River | name: American Double / Imperial IPA | Pliney the Younger | Rarer.      | 8.0 | 2010-07-07 | 2010-08-08 |
 
   Scenario: Listing beers
     When I send an API GET request to /v1/beers.json
@@ -38,6 +43,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 1,
                 "name" : "Southern Tier"
+              },
+              "beer_style" : {
+                "id"   : 1,
+                "name" : "Pumpkin Ale"
               }
             },
             { "id"          : 3,
@@ -49,6 +58,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 2,
                 "name" : "Abita"
+              },
+              "beer_style" : {
+                "id"   : 3,
+                "name" : "Fruit / Vegetable Beer"
               }
             }
           ]
@@ -73,6 +86,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 1,
                 "name" : "Southern Tier"
+              },
+              "beer_style" : {
+                "id"   : 1,
+                "name" : "Pumpkin Ale"
               }
             },
             { "id"          : 3,
@@ -84,6 +101,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 2,
                 "name" : "Abita"
+              },
+              "beer_style" : {
+                "id"   : 3,
+                "name" : "Fruit / Vegetable Beer"
               }
             }
           ]
@@ -108,6 +129,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 2,
                 "name" : "Abita"
+              },
+              "beer_style" : {
+                "id"   : 3,
+                "name" : "Fruit / Vegetable Beer"
               }
             }
           ]
@@ -132,6 +157,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 1,
                 "name" : "Southern Tier"
+              },
+              "beer_style" : {
+                "id"   : 1,
+                "name" : "Pumpkin Ale"
               }
             },
             { "id"          : 2,
@@ -143,6 +172,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 3,
                 "name" : "Russian River"
+              },
+              "beer_style" : {
+                "id"   : 2,
+                "name" : "American Double / Imperial IPA"
               }
             },
             { "id"          : 3,
@@ -154,6 +187,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 2,
                 "name" : "Abita"
+              },
+              "beer_style" : {
+                "id"   : 3,
+                "name" : "Fruit / Vegetable Beer"
               }
             }
           ]
@@ -178,6 +215,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 1,
                 "name" : "Southern Tier"
+              },
+              "beer_style" : {
+                "id"   : 1,
+                "name" : "Pumpkin Ale"
               }
             },
             { "id"          : 2,
@@ -189,6 +230,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 3,
                 "name" : "Russian River"
+              },
+              "beer_style" : {
+                "id"   : 2,
+                "name" : "American Double / Imperial IPA"
               }
             },
             { "id"          : 3,
@@ -200,6 +245,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 2,
                 "name" : "Abita"
+              },
+              "beer_style" : {
+                "id"   : 3,
+                "name" : "Fruit / Vegetable Beer"
               }
             }
           ]
@@ -224,6 +273,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 2,
                 "name" : "Abita"
+              },
+              "beer_style" : {
+                "id"   : 3,
+                "name" : "Fruit / Vegetable Beer"
               }
             },
             { "id"          : 1,
@@ -235,6 +288,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 1,
                 "name" : "Southern Tier"
+              },
+              "beer_style" : {
+                "id"   : 1,
+                "name" : "Pumpkin Ale"
               }
             }
           ]
@@ -259,6 +316,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 2,
                 "name" : "Abita"
+              },
+              "beer_style" : {
+                "id"   : 3,
+                "name" : "Fruit / Vegetable Beer"
               }
             }
           ]
@@ -283,6 +344,10 @@ Feature: List beers
               "brewery"     : {
                 "id"   : 2,
                 "name" : "Abita"
+              },
+              "beer_style" : {
+                "id"   : 3,
+                "name" : "Fruit / Vegetable Beer"
               }
             }
           ]

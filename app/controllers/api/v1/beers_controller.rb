@@ -18,6 +18,7 @@ class Api::V1::BeersController < Api::V1::BaseController
   def create
     beer = current_user.beers.build(params[:beer])
     beer.brewery = current_user.breweries.find_by_id(params[:brewery_id])
+    beer.beer_style = current_user.beer_styles.find_by_id(params[:beer_style_id])
 
     if beer.save
       head :created, location: v1_beer_url(beer, format: :json)

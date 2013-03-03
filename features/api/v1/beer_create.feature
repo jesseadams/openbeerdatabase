@@ -13,7 +13,10 @@ Feature: Create a beer
     Given the following brewery exists:
       | user                  | name  |
       | private_token: x1y2z3 | Abita |
-    When I create the following beer via the API for the "Abita" brewery using the "x1y2z3" token:
+    And the following beer style exists:
+      | user                  | name                   | description      |
+      | private_token: x1y2z3 | Fruit / Vegetable Beer | Fruity and stuff |
+    When I create the following "Fruit / Vegetable Beer" style beer via the API for the "Abita" brewery using the "x1y2z3" token:
       | name  | description | abv |
       | Amber | Common.     | 4.5 |
     Then I should receive a 201 response
@@ -26,7 +29,10 @@ Feature: Create a beer
     Given the following brewery exists:
       | user                 | name  |
       | public_token: a1b2c3 | Abita |
-    When I create the following beer via the API for the "Abita" brewery using the "a1b2c3" token:
+    And the following beer style exists:
+      | user                 | name                   | description      |
+      | public_token: a1b2c3 | Fruit / Vegetable Beer | Fruity and stuff |
+    When I create the following "Fruit / Vegetable Beer" style beer via the API for the "Abita" brewery using the "a1b2c3" token:
       | name  | description | abv |
       | Amber | Common.     | 4.5 |
     Then I should receive a 401 response
@@ -34,7 +40,10 @@ Feature: Create a beer
 
   Scenario: Creating a beer with a brewery not owned by the requesting API client
     Given a brewery exists with a name of "Southern Tier"
-    When I create the following beer via the API for the "Southern Tier" brewery using the "x1y2z3" token:
+    And the following beer style exists:
+      | name        | description    |
+      | Pumpkin Ale | Ultra Pumpkiny |
+    When I create the following "Pumpkin Ale" style beer via the API for the "Southern Tier" brewery using the "x1y2z3" token:
       | name     |
       | Pumpking |
     Then I should receive a 400 response
@@ -42,17 +51,21 @@ Feature: Create a beer
 
   Scenario: Creating a beer with validation errors
     Given a brewery exists with a name of "Southern Tier"
-    When I create the following beer via the API for the "Southern Tier" brewery using the "x1y2z3" token:
+    And the following beer style exists:
+      | name        | description    |
+      | Pumpkin Ale | Ultra Pumpkiny |
+    When I create the following "Pumpkin Ale" style beer via the API for the "Southern Tier" brewery using the "x1y2z3" token:
       | name | description |
       |      |             |
     Then I should receive a 400 response
     And I should see the following JSON response:
       """
         { "errors" : {
-            "brewery_id"  : ["can't be blank"],
-            "name"        : ["can't be blank"],
-            "description" : ["can't be blank"],
-            "abv"         : ["can't be blank", "is not a number"]
+            "brewery_id"     : ["can't be blank"],
+            "beer_style_id"  : ["can't be blank"],
+            "name"           : ["can't be blank"],
+            "description"    : ["can't be blank"],
+            "abv"            : ["can't be blank", "is not a number"]
           }
         }
       """
