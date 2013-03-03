@@ -33,6 +33,9 @@ Then /^the Location header should be set to (.+)$/ do |page_name|
              when /^the API brewery page for "([^"]+)"$/
                brewery = Brewery.find_by_name!($1)
                v1_brewery_url(brewery, format: :json, host: API_HOST)
+             when /^the API beer style page for "([^"]+)"$/
+               beer_style = BeerStyle.find_by_name!($1)
+               v1_beer_style_url(beer_style, format: :json, host: API_HOST)
              end
 
   last_response.headers["Location"].should == location
@@ -78,6 +81,20 @@ When /^I update the "([^"]*)" beer via the API using the "([^"]*)" token:$/ do |
   end
 end
 
+# Beer Style
+
+When /^I create the following (?:beer style|beer styles) via the API using the "([^"]*)" token:$/ do |token, table|
+  table.hashes.each do |hash|
+    step %{I send an API POST request to /v1/beer_styles.json?token=#{token}}, { beer_style: hash }.to_json
+  end
+end
+
+When /^I update the "([^"]*)" beer style via the API using the "([^"]*)" token:$/ do |name, token, table|
+  beer_style = BeerStyle.find_by_name!(name)
+  table.hashes.each do |hash|
+    step %{I send an API PUT request to /v1/beer_styles/#{beer_style.id}.json?token=#{token}}, { beer_style: hash }.to_json
+  end
+end
 
 # Brewery
 

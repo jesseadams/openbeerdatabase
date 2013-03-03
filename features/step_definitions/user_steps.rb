@@ -32,6 +32,12 @@ Then /^the API user with the (public|private) token "([^"]*)" should have (\d+) 
   user.breweries.count.should == count
 end
 
+Then /^the API user with the (public|private) token "([^"]*)" should have (\d+) (?:beer style|beer styles)?$/ do |type, token, count|
+  type = "#{type}_token"
+  user = User.where(type => token).first
+  user.beer_styles.count.should == count
+end
+
 Then /^I should see the API tokens for the "([^"]*)" account$/ do |name|
   user = User.find_by_name!(name)
 

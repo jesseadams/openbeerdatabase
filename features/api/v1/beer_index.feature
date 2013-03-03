@@ -354,6 +354,34 @@ Feature: List beers
         }
       """
 
+  Scenario: Listing beers, for a specific beer style
+    When I send an API GET request to /v1/beers.json?beer_style_id=3
+    Then I should receive a 200 response
+    And I should see the following JSON response:
+      """
+        { "page"  : 1,
+          "pages" : 1,
+          "total" : 1,
+          "beers" : [
+            { "id"          : 3,
+              "name"        : "Strawberry Harvest",
+              "description" : "Southern.",
+              "abv"         : 4.2,
+              "created_at"  : "2010-05-05T00:00:00Z",
+              "updated_at"  : "2010-06-06T00:00:00Z",
+              "brewery"     : {
+                "id"   : 2,
+                "name" : "Abita"
+              },
+              "beer_style" : {
+                "id"   : 3,
+                "name" : "Fruit / Vegetable Beer"
+              }
+            }
+          ]
+        }
+      """
+
   Scenario: Listing beers, with an invalid search query
     When I send an API GET request to /v1/beers.json?query=a
     Then I should receive a 400 response
