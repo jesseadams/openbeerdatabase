@@ -14,10 +14,18 @@ class Api::V1::BeerPresenter < ApiPresenter
         id:   @beer.brewery.id,
         name: @beer.brewery.name
       },
-      beer_style:  {
+      beer_style: beer_style_fields
+    }
+  end
+
+  def beer_style_fields
+    if @beer.beer_style.nil?
+      {}
+    else
+      {
         id:   @beer.beer_style.id,
         name: @beer.beer_style.name
       }
-    }
+    end
   end
 end
